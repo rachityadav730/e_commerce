@@ -1,7 +1,7 @@
 import React from 'react'
 import ProductCart from './ProductCart'
 
-const Product = () => {
+const Product = ({products}) => {
   return (
     <div className='py-10'>
       <div className='flex flex-col items-center gap-4'>
@@ -13,8 +13,15 @@ const Product = () => {
       You can use different background colors for the avatar. The following demo generates the color based on the name of the person.
       </p>
       </div>
-      <div className='max-w-screen-xl mx-auto'>
-        <ProductCart/>
+      <div className='max-w-screen-xl mx-auto py-10 grid grid-cols-4 gap-10'>
+        
+        
+        {
+          products.map((item) =>(
+                    <ProductCart key= {item._id} product= {item}/>
+          )
+          )
+        }
       </div>
     </div>
   )

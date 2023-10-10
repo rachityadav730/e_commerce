@@ -3,7 +3,7 @@ import Gaytri_logo from '../assets/Gaytri_outfit.png'
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 const Header = () => {
   return (
-    <div className='w-full h-20 bg-white border-b-[1px] border-b-grey-800 font-titleFont'>
+    <div className='w-full h-20 bg-white border-b-[1px] border-b-grey-800 font-titleFont sticky top-0 z-50'>
         <div className='max-w-screen-xl h-full mx-auto flex item-center justify-between'>
             <div>
                 <img src= {Gaytri_logo} alt = "" height='60px' width={'60px'}/>
