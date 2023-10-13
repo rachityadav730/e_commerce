@@ -1,12 +1,15 @@
 import React from 'react'
 import Gaytri_logo from '../assets/Gaytri_outfit.png'
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
+import { Link } from 'react-router-dom';
 const Header = () => {
   return (
     <div className='w-full h-20 bg-white border-b-[1px] border-b-grey-800 font-titleFont sticky top-0 z-50'>
         <div className='max-w-screen-xl h-full mx-auto flex item-center justify-between'>
             <div>
+                <Link to="/">
                 <img src= {Gaytri_logo} alt = "" height='60px' width={'60px'}/>
+                </Link>
             </div>
             <div>
                 <ul className='flex items-center gap-8'>
