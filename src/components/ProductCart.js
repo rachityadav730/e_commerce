@@ -1,8 +1,13 @@
 import React from 'react'
 import { useNavigate } from 'react-router-dom'
+import { useDispatch } from "react-redux";
+import { addToCart } from "../redux/gaytriSlice";
+import { ToastContainer, toast } from 'react-toastify';
 
 const ProductCart = ({product}) => {
 const navigate = useNavigate()
+const dispatch = useDispatch()
+
   const _id = product.title
   const idString = (_id)=>{
     return String(_id).toLowerCase().split(" ").join("")
@@ -32,7 +37,14 @@ const navigate = useNavigate()
             <div className='flex gap-2 transform group-hover:translate-x-24 transition-transform duration-500'>
             <p>{product.price}</p>
             </div>
-            <p className='absolute z-20 w-[100px] text-grey-500 hover:text-grey-900 flex items-center gap-1 top-0 transform -translate-x-32 group-hover:translate-x-0 transition-transform cursor-pointer duration-500'>Add to cart</p>
+            <p  onClick={()=>dispatch(addToCart({
+_id: product._id,
+title: product.title,
+image: product.image,
+price: product.price,
+quantity: 1,
+description: product.description,
+}))  & toast.success(`${product.title} is added`) } className='absolute z-20 w-[100px] text-grey-500 hover:text-grey-900 flex items-center gap-1 top-0 transform -translate-x-32 group-hover:translate-x-0 transition-transform cursor-pointer duration-500'>Add to cart</p>
           </div>
       </div>
 
@@ -51,6 +63,19 @@ const navigate = useNavigate()
         }
       </div>
       </div>
+      <ToastContainer
+            position='top-left'
+            autoClose = {2000}
+            hideProgressBar ={false}
+            newestOnTop ={false}
+            closeOnClick
+            rtl = {false}
+            pauseOnFocusLoss
+            draggable
+            pauseOnHover
+            theme = "dark"
+            
+            />
     </div>
   )
 }

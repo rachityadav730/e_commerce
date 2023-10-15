@@ -3,11 +3,13 @@ import { useLocation } from "react-router-dom";
 import { AiTwotoneStar } from "react-icons/ai";
 import { useDispatch } from "react-redux";
 import { addToCart } from "../redux/gaytriSlice";
+import { ToastContainer, toast } from 'react-toastify';
 
 const ProductDesc = ({product}) => {
 
 
   const dispatch = useDispatch()
+  const [qty,setQty] = useState(1)
   const [details, setDetails] = useState({});
   const location = useLocation();
 
@@ -59,24 +61,26 @@ const ProductDesc = ({product}) => {
             <div className="w-52 flex items-center justify-between text-gray-500 gap-4 border p-3">
               <p className="text-sm">Quantity</p>
               <div className="flex items-center gap-4text-sm font-semibold">
-                <button className="border h-5 font-normal text-lg flex items-center justify-center px-2 hover:bg-grey-700 hover:text-white cursor-pointer duration-300 hover:bg-black">
+                <button onClick={()=>setQty(qty === 1 ? 1 : qty - 1)} className="border h-5 font-normal text-lg flex items-center justify-center px-2 hover:bg-grey-700 hover:text-white cursor-pointer duration-300 hover:bg-black">
                   -
                 </button>
-                <span>{1}</span>
-                <button className="border h-5 font-normal text-lg flex items-center justify-center px-2 hover:bg-grey-700 hover:text-white cursor-pointer duration-300 hover:bg-black">
+                <span>{qty}</span>
+                <button onClick={()=>setQty(qty + 1)} className="border h-5 font-normal text-lg flex items-center justify-center px-2 hover:bg-grey-700 hover:text-white cursor-pointer duration-300 hover:bg-black">
                   +
                 </button>
               </div>
             </div>
-            <button onClick={()=>dispatch(addToCart({
+            <button 
+            
+            onClick={()=>dispatch(addToCart({
 
               _id: details._id,
               title: details.title,
               image: details.image,
               price: details.price,
-              quantity: 1,
+              quantity: qty,
               description: details.description,
-            })) } className="bg-black text-white py-3 px-6 active:bg-gray-800">
+            })) & toast.success(`${details.title} is added`) } className="bg-black text-white py-3 px-6 active:bg-gray-800">
               add to cart
             </button>
           </div>
@@ -87,6 +91,19 @@ const ProductDesc = ({product}) => {
           </p>
           </div>
       </div>
+      <ToastContainer
+            position='top-left'
+            autoClose = {2000}
+            hideProgressBar ={false}
+            newestOnTop ={false}
+            closeOnClick
+            rtl = {false}
+            pauseOnFocusLoss
+            draggable
+            pauseOnHover
+            theme = "dark"
+            
+            />
     </div>
   );
 };

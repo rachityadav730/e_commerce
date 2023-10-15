@@ -2,8 +2,12 @@ import React from 'react'
 import Gaytri_logo from '../assets/Gaytri_outfit.png'
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import { Link } from 'react-router-dom';
+import { useSelector } from 'react-redux';
+
 const Header = () => {
-  return (
+    const productdata = useSelector((state) => state.gaytri.productData)
+    console.log('productdata',productdata)
+    return (
     <div className='w-full h-20 bg-white border-b-[1px] border-b-grey-800 font-titleFont sticky top-0 z-50'>
         <div className='max-w-screen-xl h-full mx-auto flex item-center justify-between'>
             <div>
@@ -35,11 +39,15 @@ const Header = () => {
                 </ul>
 
                 <div className='relative'>
+                <Link to="/cart">
                     <ShoppingCartIcon/>
-                    <span>0</span>
+                    </Link>
+                    <span>{productdata.length}</span>
                 </div>
                 
             </div>
+
+            
         </div>
     </div>
   )
